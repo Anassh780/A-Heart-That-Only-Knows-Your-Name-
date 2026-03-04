@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Zainab Fatima 💌</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --rose:      #c0446a;
+      --rose-light:#e8829a;
+      --rose-pale: #fce8ee;
+      --gold:      #c9956a;
+      --gold-pale: #f5e6d8;
+      --cream:     #fff9f5;
+      --ink:       #2d1a24;
+      --ink-soft:  #5a3545;
+      --petal1:    #f4a7bb;
+      --petal2:    #f9c5d1;
+      --petal3:    #fde8ef;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background: #1a0a12;
+      font-family: 'Lora', Georgia, serif;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ── CANVAS BACKGROUND ── */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 40%, rgba(192,68,106,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 30% 70%, rgba(201,149,106,0.10) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .envelope-icon {
+      font-size: 56px;
+      margin-bottom: 24px;
+      animation: float 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(232,130,154,0.6));
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+
+    .hero-label {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(13px, 2.5vw, 16px);
+      color: var(--rose-light);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      opacity: 0;
+      animation: fadeUp 1s 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 8vw, 80px);
+      font-style: italic;
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      opacity: 0;
+      animation: fadeUp 1s 0.6s forwards;
+      text-shadow: 0 0 60px rgba(232,130,154,0.4);
+    }
+
+    .hero-title span {
+      color: var(--rose-light);
+      font-weight: 700;
+    }
+
+    .hero-sub {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: clamp(14px, 2.5vw, 18px);
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 1s 0.9s forwards;
+    }
+
+    .open-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--rose) 0%, #e0607a 100%);
+      color: #fff;
+      border: none;
+      padding: 16px 40px;
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      letter-spacing: 1px;
+      border-radius: 50px;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeUp 1s 1.2s forwards;
+      box-shadow: 0 8px 32px rgba(192,68,106,0.45), 0 0 0 0 rgba(192,68,106,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      z-index: 5;
+    }
+    .open-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 16px 48px rgba(192,68,106,0.55), 0 0 0 8px rgba(192,68,106,0.12);
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(24px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    /* scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeUp 1s 1.8s forwards;
+      color: rgba(255,255,255,0.3);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+    .scroll-arrow {
+      width: 20px; height: 20px;
+      border-right: 2px solid rgba(255,255,255,0.3);
+      border-bottom: 2px solid rgba(255,255,255,0.3);
+      transform: rotate(45deg);
+      animation: bounce 1.5s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: rotate(45deg) translateY(0); }
+      50%      { transform: rotate(45deg) translateY(6px); }
+    }
+
+    /* ── LETTER SECTION ── */
+    .letter-section {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px 80px;
+    }
+
+    /* decorative strip */
+    .strip {
+      width: 100%;
+      max-width: 760px;
+      height: 6px;
+      background: linear-gradient(90deg, transparent, var(--rose) 30%, var(--gold) 70%, transparent);
+      margin-bottom: 0;
+      border-radius: 3px;
+      opacity: 0.7;
+    }
+
+    /* paper card */
+    .paper {
+      position: relative;
+      max-width: 760px;
+      width: 100%;
+      background: var(--cream);
+      border-radius: 0 0 16px 16px;
+      box-shadow:
+        0 4px 6px rgba(0,0,0,0.15),
+        0 20px 60px rgba(0,0,0,0.4),
+        0 60px 120px rgba(0,0,0,0.3),
+        inset 0 0 80px rgba(245,230,216,0.3);
+      padding: clamp(32px,6vw,72px) clamp(24px,7vw,80px) clamp(40px,6vw,72px);
+      background-image:
+        linear-gradient(rgba(192,68,106,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(192,68,106,0.01) 1px, transparent 1px);
+      background-size: 100% 38px, 38px 100%;
+    }
+
+    /* torn top edge illusion */
+    .paper::before {
+      content: '';
+      position: absolute;
+      top: -2px; left: 0; right: 0;
+      height: 8px;
+      background: var(--cream);
+      border-radius: 0;
+      clip-path: polygon(0% 100%, 1% 0%, 3% 100%, 5% 10%, 7% 100%, 9% 20%, 11% 100%, 13% 5%, 15% 100%, 17% 15%, 19% 100%, 21% 0%, 23% 100%, 25% 20%, 27% 100%, 29% 10%, 31% 100%, 33% 5%, 35% 100%, 37% 15%, 39% 100%, 41% 0%, 43% 100%, 45% 20%, 47% 100%, 49% 10%, 51% 100%, 53% 5%, 55% 100%, 57% 15%, 59% 100%, 61% 0%, 63% 100%, 65% 20%, 67% 100%, 69% 10%, 71% 100%, 73% 5%, 75% 100%, 77% 15%, 79% 100%, 81% 0%, 83% 100%, 85% 20%, 87% 100%, 89% 10%, 91% 100%, 93% 5%, 95% 100%, 97% 15%, 99% 100%, 100% 100%);
+    }
+
+    /* corner roses */
+    .paper-rose {
+      position: absolute;
+      font-size: clamp(22px, 4vw, 36px);
+      opacity: 0.55;
+      filter: drop-shadow(0 2px 8px rgba(192,68,106,0.3));
+      line-height: 1;
+    }
+    .paper-rose.tl { top: 18px; left: 20px; }
+    .paper-rose.tr { top: 18px; right: 20px; transform: scaleX(-1); }
+    .paper-rose.bl { bottom: 20px; left: 20px; }
+    .paper-rose.br { bottom: 20px; right: 20px; transform: scaleX(-1); }
+
+    /* ── LETTER TYPOGRAPHY ── */
+    .letter-head {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .letter-ornament {
+      font-size: 18px;
+      color: var(--gold);
+      letter-spacing: 12px;
+      margin-bottom: 10px;
+    }
+
+    .letter-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(16px, 3vw, 22px);
+      color: var(--rose);
+      letter-spacing: 1px;
+    }
+
+    .letter-date {
+      text-align: right;
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0.8;
+    }
+
+    .salutation {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 4vw, 32px);
+      font-style: italic;
+      color: var(--rose);
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(192,68,106,0.15);
+    }
+
+    .letter-body p {
+      font-family: 'Lora', serif;
+      font-size: clamp(15px, 2.2vw, 17px);
+      line-height: 2;
+      color: var(--ink);
+      margin-bottom: 22px;
+      text-align: justify;
+    }
+
+    .letter-body p.key-line {
+      font-style: italic;
+      font-size: clamp(16px, 2.5vw, 19px);
+      color: var(--rose);
+      text-align: center;
+      padding: 8px 0;
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* stanza */
+    .stanza {
+      margin: 28px 0 28px clamp(16px, 4vw, 48px);
+      padding-left: clamp(12px, 3vw, 24px);
+      border-left: 3px solid;
+      border-image: linear-gradient(to bottom, var(--rose-light), var(--gold)) 1;
+      position: relative;
+    }
+
+    .stanza p {
+      font-style: italic;
+      font-size: clamp(14px, 2vw, 16px) !important;
+      line-height: 1.8 !important;
+      color: var(--ink-soft) !important;
+      margin-bottom: 6px !important;
+      text-align: left !important;
+    }
+
+    /* quote */
+    .quote-block {
+      position: relative;
+      margin: 32px 0;
+      padding: 22px 24px 18px 32px;
+      background: linear-gradient(135deg, rgba(192,68,106,0.06) 0%, rgba(201,149,106,0.06) 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(192,68,106,0.15);
+    }
+
+    .quote-block::before {
+      content: '\201C';
+      position: absolute;
+      top: -10px; left: 16px;
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      color: var(--rose);
+      opacity: 0.2;
+      line-height: 1;
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(15px, 2.2vw, 17px);
+      color: var(--ink-soft);
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    .quote-source {
+      font-family: 'Dancing Script', cursive;
+      font-size: 16px;
+      color: var(--rose);
+      text-align: right;
+    }
+
+    /* closing */
+    .closing {
+      margin-top: 44px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(192,68,106,0.12);
+    }
+
+    .closing .sign-off {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--ink-soft);
+      margin-bottom: 6px;
+    }
+
+    .closing .name {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(36px, 6vw, 52px);
+      color: var(--rose);
+      margin-top: 8px;
+      filter: drop-shadow(0 2px 12px rgba(192,68,106,0.25));
+    }
+
+    .bottom-ornament {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 20px;
+      color: var(--gold);
+      letter-spacing: 14px;
+      opacity: 0.6;
+    }
+
+    /* ── HEARTS FOOTER ── */
+    .footer-hearts {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 40px 20px 60px;
+      color: rgba(255,255,255,0.2);
+      font-family: 'Dancing Script', cursive;
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+
+    /* ── FLOATING PETALS ── */
+    .petals-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      top: -60px;
+      border-radius: 150% 0 150% 0;
+      opacity: 0;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0%   { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.5; }
+      100% { transform: translateY(110vh) rotate(720deg) translateX(80px); opacity: 0; }
+    }
+
+    /* ── HIDDEN STATE ── */
+    .letter-section { display: none; }
+    .letter-section.visible { display: flex; }
+
+    /* ── TRANSITION OVERLAY ── */
+    .transition-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(192,68,106,0.8) 0%, #1a0a12 100%);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+    .transition-overlay.show { opacity: 1; pointer-events: all; }
+
+    /* reveal animation for letter */
+    .paper-reveal {
+      animation: paperReveal 0.8s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    @keyframes paperReveal {
+      from { opacity:0; transform: translateY(40px) scale(0.97); }
+      to   { opacity:1; transform: translateY(0) scale(1); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .paper { padding: 48px 20px 40px; }
+      .paper-rose { font-size: 20px; }
+      .stanza { margin-left: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<!-- Floating petals -->
+<div class="petals-container" id="petals"></div>
+
+<!-- Transition overlay -->
+<div class="transition-overlay" id="overlay"></div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero">
+  <div class="hero-glow"></div>
+
+  <div class="envelope-icon">💌</div>
+  <div class="hero-label">A message from the heart</div>
+  <h1 class="hero-title">For <span>Zainab</span><br>Fatima</h1>
+  <p class="hero-sub">Something honest. Something sincere. Something long overdue.</p>
+
+  <button class="open-btn" onclick="openLetter()">
+    🌹 Open the Letter
+  </button>
+
+  <div class="scroll-hint">
+    <div class="scroll-arrow"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ═══ LETTER ═══ -->
+<section class="letter-section" id="letter-section">
+
+  <div class="strip"></div>
+
+  <div class="paper" id="paper">
+    <span class="paper-rose tl">🌹</span>
+    <span class="paper-rose tr">🌹</span>
+    <span class="paper-rose bl">🌸</span>
+    <span class="paper-rose br">🌸</span>
+
+    <div class="letter-head">
+      <div class="letter-ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+      <div class="letter-subtitle">— &nbsp; A Letter From the Heart &nbsp; —</div>
+    </div>
+
+    <div class="letter-date">March 2026</div>
+
+    <div class="salutation">Dear Zainab Fatima,</div>
+
+    <div class="letter-body">
+
+      <p>I don't know if I will ever be able to explain everything my heart feels for you, but today I want to try. I have kept many things inside my heart for a long time, and sometimes silence becomes too painful. So I am writing these words honestly — not perfectly, but sincerely.</p>
+
+      <p>Zainab, I know you have been through things that changed you. I can see how sometimes you become quiet, distant, and lost in your own thoughts. Sometimes you choose to be alone; sometimes it feels as though you hide your feelings from everyone. Maybe you are protecting your heart. Maybe life hurt you in ways I cannot fully understand.</p>
+
+      <p>And I respect that deeply.</p>
+
+      <p>But there is one question that has lived in my heart for a very long time —</p>
+
+      <p class="key-line">Can you not become normal with just one person… the one who still loves you after all these years?</p>
+
+      <div class="stanza">
+        <p>The one who stayed even during your hardest times.</p>
+        <p>The one who always tried to make you smile.</p>
+        <p>The one who never cared about who you were or what people said.</p>
+        <p>The one who still carries feelings for you no matter how much time passes.</p>
+        <p>The one who prays for you quietly.</p>
+        <p>The one who cried because of you.</p>
+        <p>The one who never wants to see you hurt or struggling.</p>
+      </div>
+
+      <div class="stanza">
+        <p>Even if you don't talk much…</p>
+        <p>Even if you stay distant…</p>
+        <p>Even if the world leaves you alone…</p>
+      </div>
+
+      <p>I would still stay beside you.</p>
+
+      <p>Because loving you was never something temporary for me.</p>
+
+      <p>Zainab, I also have a heart. I also have feelings. For a long time I tried to hide them because I didn't want to make things difficult for you. But the truth is, I cannot pretend anymore. My heart still belongs to you, and living without you feels like something inside me is missing.</p>
+
+      <p>If I ever hurt you in any way, please believe me when I say I am truly sorry. I never wanted to be the reason for your pain. Sometimes people make mistakes not because they don't care, but because they don't know how to express their love properly.</p>
+
+      <p>From today, I don't want to just make empty promises.</p>
+
+      <div class="stanza">
+        <p>I want to become someone you can truly believe in.</p>
+        <p>Someone who protects your heart instead of hurting it.</p>
+        <p>Someone who stays when things are difficult, not only when they are easy.</p>
+      </div>
+
+      <div class="stanza">
+        <p>I will try to be patient with you.</p>
+        <p>I will respect your silence.</p>
+        <p>I will support you even when you push everyone away.</p>
+      </div>
+
+      <p>Because you matter to me more than you probably realize.</p>
+
+      <p>Sometimes I feel like God created my heart in a way that it only knows your name. How could I look at another when my soul already chose you? It feels impossible. Even the thought of loving someone else feels wrong to me.</p>
+
+      <p>You are the only person my heart truly wants.</p>
+
+      <div class="quote-block">
+        <div class="quote-text">"If it's possible for one person to be hurt by another, then it's possible for that person to be healed by another."</div>
+        <div class="quote-source">— Fruits Basket</div>
+      </div>
+
+      <p>Maybe I cannot fix everything in your life, but if I could help ease even a little of your pain, I would do it without hesitation.</p>
+
+      <div class="quote-block">
+        <div class="quote-text">"No matter how deep the night, it always turns to day eventually."</div>
+        <div class="quote-source">— One Piece</div>
+      </div>
+
+      <p>Maybe right now life feels heavy for you, but I believe one day things will become lighter again.</p>
+
+      <div class="quote-block">
+        <div class="quote-text">"I want to be with you. From now on, I want to spend all of my days until my death with you."</div>
+        <div class="quote-source">— Naruto</div>
+      </div>
+
+      <p>Zainab Fatima, I don't want to force you, and I don't want to change who you are. I just want you to know something simple and honest —</p>
+
+      <div class="stanza">
+        <p>I am the one who still wants you.</p>
+        <p>My love is only for you.</p>
+      </div>
+
+      <div class="stanza">
+        <p>Even if you stay quiet.</p>
+        <p>Even if you keep your distance.</p>
+        <p>Even if you feel like no one understands you.</p>
+      </div>
+
+      <p>I will still pray for your happiness.</p>
+      <p>Because loving you was never just a moment for me.</p>
+      <p>It became a part of who I am.</p>
+
+    </div><!-- /letter-body -->
+
+    <div class="closing">
+      <p class="sign-off">With all my heart,</p>
+      <p class="sign-off">Your love —</p>
+      <div class="name">Anas</div>
+    </div>
+
+    <div class="bottom-ornament">✦ &nbsp; 🌹 &nbsp; 💕 &nbsp; 🌹 &nbsp; ✦</div>
+
+  </div><!-- /paper -->
+</section>
+
+<div class="footer-hearts" id="footer-hearts" style="display:none">
+  written with love, sealed with prayer 🤍
+</div>
+
+<script>
+/* ── STARFIELD + BOKEH BACKGROUND ── */
+const canvas = document.getElementById('bg-canvas');
+const ctx    = canvas.getContext('2d');
+let W, H;
+
+const stars = [];
+const bokeh = [];
+
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+for (let i = 0; i < 160; i++) {
+  stars.push({
+    x: Math.random(), y: Math.random(),
+    r: Math.random() * 1.2 + 0.2,
+    a: Math.random(),
+    speed: Math.random() * 0.004 + 0.001,
+    phase: Math.random() * Math.PI * 2
+  });
+}
+
+for (let i = 0; i < 14; i++) {
+  bokeh.push({
+    x: Math.random(), y: Math.random(),
+    r: Math.random() * 80 + 30,
+    a: Math.random() * 0.12 + 0.03,
+    dx: (Math.random() - 0.5) * 0.0003,
+    dy: (Math.random() - 0.5) * 0.0002,
+    hue: Math.random() > 0.5 ? 340 : 25
+  });
+}
+
+let t = 0;
+function drawBg() {
+  ctx.clearRect(0, 0, W, H);
+
+  /* deep bg */
+  const bg = ctx.createRadialGradient(W*.5, H*.4, 0, W*.5, H*.5, Math.max(W,H));
+  bg.addColorStop(0, '#2a0d1a');
+  bg.addColorStop(1, '#0d0508');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  /* bokeh */
+  bokeh.forEach(b => {
+    b.x = (b.x + b.dx + 1) % 1;
+    b.y = (b.y + b.dy + 1) % 1;
+    const g = ctx.createRadialGradient(b.x*W, b.y*H, 0, b.x*W, b.y*H, b.r);
+    g.addColorStop(0, `hsla(${b.hue},70%,60%,${b.a})`);
+    g.addColorStop(1, `hsla(${b.hue},70%,60%,0)`);
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(b.x*W, b.y*H, b.r, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  /* stars */
+  stars.forEach(s => {
+    const pulse = Math.sin(t * s.speed * 60 + s.phase) * 0.4 + 0.6;
+    ctx.beginPath();
+    ctx.arc(s.x*W, s.y*H, s.r * pulse, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(255,220,230,${s.a * pulse * 0.9})`;
+    ctx.fill();
+  });
+
+  t += 0.016;
+  requestAnimationFrame(drawBg);
+}
+drawBg();
+
+/* ── PETALS ── */
+function createPetals() {
+  const container = document.getElementById('petals');
+  const colors = ['#f4a7bb','#f9c5d1','#fde8ef','#e8829a','#f7d4de','#fbb6c8'];
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const size = Math.random() * 14 + 7;
+    p.style.cssText = `
+      left: ${Math.random()*100}%;
+      width: ${size}px;
+      height: ${size * 0.6}px;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+      opacity: 0;
+      animation-duration: ${Math.random()*8+6}s;
+      animation-delay: ${Math.random()*10}s;
+      filter: blur(${Math.random()*1}px);
+    `;
+    container.appendChild(p);
+  }
+}
+createPetals();
+
+/* ── OPEN LETTER ── */
+function openLetter() {
+  const overlay = document.getElementById('overlay');
+  overlay.classList.add('show');
+
+  setTimeout(() => {
+    document.getElementById('hero').style.display = 'none';
+    const ls = document.getElementById('letter-section');
+    ls.style.display = 'flex';
+    ls.classList.add('visible');
+    document.getElementById('footer-hearts').style.display = 'block';
+
+    const paper = document.getElementById('paper');
+    paper.classList.add('paper-reveal');
+
+    overlay.classList.remove('show');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, 600);
+}
+</script>
+</body>
+</html>
