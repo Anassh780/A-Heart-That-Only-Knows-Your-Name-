@@ -3,474 +3,177 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For Zainab Fatima 💌</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet"/>
+  <title>A Heart That Only Knows Your Name 💌</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Dancing+Script:wght@500;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --rose:      #c0446a;
-      --rose-light:#e8829a;
-      --rose-pale: #fce8ee;
-      --gold:      #c9956a;
-      --gold-pale: #f5e6d8;
-      --cream:     #fff9f5;
-      --ink:       #2d1a24;
-      --ink-soft:  #5a3545;
-      --petal1:    #f4a7bb;
-      --petal2:    #f9c5d1;
-      --petal3:    #fde8ef;
+      --rose:#c0446a; --rose-light:#e8829a; --rose-pale:#fce8ee;
+      --gold:#c9956a; --cream:#fff9f5; --ink:#2d1a24; --ink-soft:#5a3545;
     }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{min-height:100vh;background:#100508;font-family:'Lora',Georgia,serif;overflow-x:hidden;}
 
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
 
-    html { scroll-behavior: smooth; }
+    /* cursor */
+    .cursor-heart{position:fixed;pointer-events:none;z-index:9999;font-size:18px;transform:translate(-50%,-50%);transition:left .08s,top .08s;opacity:.85;}
 
-    body {
-      min-height: 100vh;
-      background: #1a0a12;
-      font-family: 'Lora', Georgia, serif;
-      overflow-x: hidden;
-      cursor: default;
-    }
+    /* petals */
+    .petals-container{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
+    .petal{position:absolute;top:-60px;border-radius:150% 0 150% 0;opacity:0;animation:fall linear infinite;}
+    @keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:0;}8%{opacity:.75;}90%{opacity:.4;}100%{transform:translateY(110vh) rotate(800deg) translateX(60px);opacity:0;}}
 
-    /* ── CANVAS BACKGROUND ── */
-    #bg-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
+    /* floating hearts */
+    .heart-float{position:fixed;pointer-events:none;z-index:1;opacity:0;animation:heartRise linear forwards;}
+    @keyframes heartRise{0%{transform:translateY(0) scale(.5);opacity:0;}20%{opacity:.65;}100%{transform:translateY(-110vh) scale(1.3);opacity:0;}}
 
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      z-index: 2;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 60px 24px;
-    }
+    /* ══ HERO ══ */
+    .hero{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;overflow:hidden;}
+    .hero-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% 42%,rgba(192,68,106,.22) 0%,transparent 70%),radial-gradient(ellipse 50% 40% at 30% 72%,rgba(201,149,106,.12) 0%,transparent 60%);animation:glowPulse 4s ease-in-out infinite;}
+    @keyframes glowPulse{0%,100%{opacity:1;}50%{opacity:.55;}}
 
-    .hero-glow {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 70% 60% at 50% 40%, rgba(192,68,106,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 30% 70%, rgba(201,149,106,0.10) 0%, transparent 60%);
-      pointer-events: none;
-    }
+    .ring{position:absolute;border-radius:50%;border:1px solid rgba(192,68,106,.13);animation:spin linear infinite;pointer-events:none;}
+    .ring1{width:320px;height:320px;animation-duration:22s;}
+    .ring2{width:520px;height:520px;animation-duration:34s;border-color:rgba(201,149,106,.09);}
+    .ring3{width:730px;height:730px;animation-duration:48s;border-style:dashed;border-color:rgba(192,68,106,.07);}
+    @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 
-    .envelope-icon {
-      font-size: 56px;
-      margin-bottom: 24px;
-      animation: float 4s ease-in-out infinite;
-      filter: drop-shadow(0 0 20px rgba(232,130,154,0.6));
-    }
+    .envelope-wrap{position:relative;margin-bottom:30px;}
+    .envelope-icon{font-size:66px;animation:floatBounce 3.5s ease-in-out infinite;filter:drop-shadow(0 0 28px rgba(232,130,154,.75));display:block;}
+    @keyframes floatBounce{0%,100%{transform:translateY(0) rotate(-4deg);}50%{transform:translateY(-15px) rotate(4deg);}}
+    .sp{position:absolute;font-size:16px;animation:sparkle 2s ease-in-out infinite;}
+    .sp1{top:-10px;right:-14px;animation-delay:0s;}
+    .sp2{bottom:2px;left:-18px;animation-delay:.7s;}
+    .sp3{top:12px;left:-22px;animation-delay:1.4s;}
+    @keyframes sparkle{0%,100%{transform:scale(.5) rotate(0deg);opacity:.3;}50%{transform:scale(1.3) rotate(20deg);opacity:1;}}
 
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50%      { transform: translateY(-12px); }
-    }
+    .hero-label{font-family:'Dancing Script',cursive;font-size:clamp(13px,2.5vw,17px);color:var(--rose-light);letter-spacing:5px;text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fadeUp 1s .3s forwards;}
+    .hero-title{font-family:'Playfair Display',serif;font-size:clamp(30px,7vw,72px);font-style:italic;color:#fff;line-height:1.12;margin-bottom:14px;opacity:0;animation:fadeUp 1s .6s forwards;text-shadow:0 0 80px rgba(232,130,154,.5);}
+    .hero-title .accent{color:var(--rose-light);font-weight:700;position:relative;}
+    .hero-title .accent::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--rose-light),transparent);transform:scaleX(0);transform-origin:center;animation:lineGrow 1.5s 1.8s forwards;}
+    @keyframes lineGrow{to{transform:scaleX(1);}}
+    .hero-tagline{font-family:'Cinzel',serif;font-size:clamp(10px,1.8vw,13px);color:rgba(255,255,255,.3);letter-spacing:6px;text-transform:uppercase;margin-bottom:14px;opacity:0;animation:fadeUp 1s .85s forwards;}
+    .hero-sub{font-family:'Lora',serif;font-style:italic;font-size:clamp(14px,2.2vw,18px);color:rgba(255,255,255,.4);margin-bottom:52px;opacity:0;animation:fadeUp 1s 1.05s forwards;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
 
-    .hero-label {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(13px, 2.5vw, 16px);
-      color: var(--rose-light);
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-      opacity: 0;
-      animation: fadeUp 1s 0.3s forwards;
-    }
+    .open-btn{display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--rose) 0%,#e0607a 50%,#c0446a 100%);color:#fff;border:none;padding:18px 50px;font-family:'Playfair Display',serif;font-size:17px;letter-spacing:1.5px;border-radius:50px;cursor:pointer;opacity:0;animation:fadeUp 1s 1.3s forwards,btnPulse 2.5s 2.5s ease-in-out infinite;box-shadow:0 8px 36px rgba(192,68,106,.5);transition:transform .2s,box-shadow .2s;position:relative;z-index:5;overflow:hidden;}
+    .open-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:translateX(-100%);transition:transform .5s;}
+    .open-btn:hover::before{transform:translateX(100%);}
+    .open-btn:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 22px 60px rgba(192,68,106,.6),0 0 0 12px rgba(192,68,106,.1);}
+    @keyframes btnPulse{0%,100%{box-shadow:0 8px 36px rgba(192,68,106,.5),0 0 0 0 rgba(192,68,106,.25);}50%{box-shadow:0 8px 36px rgba(192,68,106,.5),0 0 0 18px rgba(192,68,106,0);}}
 
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(36px, 8vw, 80px);
-      font-style: italic;
-      font-weight: 400;
-      color: #fff;
-      line-height: 1.1;
-      margin-bottom: 12px;
-      opacity: 0;
-      animation: fadeUp 1s 0.6s forwards;
-      text-shadow: 0 0 60px rgba(232,130,154,0.4);
-    }
+    .scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s 2.2s forwards;color:rgba(255,255,255,.22);font-size:11px;letter-spacing:3px;}
+    .scroll-arrow{width:18px;height:18px;border-right:2px solid rgba(255,255,255,.22);border-bottom:2px solid rgba(255,255,255,.22);transform:rotate(45deg);animation:bounceArrow 1.4s ease-in-out infinite;}
+    @keyframes bounceArrow{0%,100%{transform:rotate(45deg) translateY(0);}50%{transform:rotate(45deg) translateY(7px);}}
 
-    .hero-title span {
-      color: var(--rose-light);
-      font-weight: 700;
-    }
+    /* ══ OVERLAY ══ */
+    .transition-overlay{position:fixed;inset:0;background:radial-gradient(ellipse at center,rgba(192,68,106,.92) 0%,#100508 100%);z-index:200;opacity:0;pointer-events:none;transition:opacity .7s ease;}
+    .transition-overlay.show{opacity:1;pointer-events:all;}
 
-    .hero-sub {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: clamp(14px, 2.5vw, 18px);
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 48px;
-      opacity: 0;
-      animation: fadeUp 1s 0.9s forwards;
-    }
+    /* ══ LETTER SECTION ══ */
+    .letter-section{position:relative;z-index:2;display:none;flex-direction:column;align-items:center;padding:0 16px 100px;}
+    .letter-section.visible{display:flex;}
+    .strip{width:100%;max-width:820px;height:5px;background:linear-gradient(90deg,transparent,var(--rose) 30%,var(--gold) 70%,transparent);border-radius:3px;opacity:.8;}
 
-    .open-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, var(--rose) 0%, #e0607a 100%);
-      color: #fff;
-      border: none;
-      padding: 16px 40px;
-      font-family: 'Playfair Display', serif;
-      font-size: 16px;
-      letter-spacing: 1px;
-      border-radius: 50px;
-      cursor: pointer;
-      opacity: 0;
-      animation: fadeUp 1s 1.2s forwards;
-      box-shadow: 0 8px 32px rgba(192,68,106,0.45), 0 0 0 0 rgba(192,68,106,0.3);
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
-      z-index: 5;
-    }
-    .open-btn:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 16px 48px rgba(192,68,106,0.55), 0 0 0 8px rgba(192,68,106,0.12);
-    }
+    /* paper */
+    .paper{position:relative;max-width:820px;width:100%;background:var(--cream);border-radius:0 0 20px 20px;box-shadow:0 4px 8px rgba(0,0,0,.2),0 28px 80px rgba(0,0,0,.5),0 80px 140px rgba(0,0,0,.35),inset 0 0 100px rgba(245,230,216,.2);padding:clamp(36px,6vw,84px) clamp(24px,7vw,92px) clamp(44px,6vw,84px);background-image:linear-gradient(rgba(192,68,106,.022) 1px,transparent 1px);background-size:100% 40px;}
+    .paper::before{content:'';position:absolute;top:-3px;left:0;right:0;height:10px;background:var(--cream);clip-path:polygon(0% 100%,1% 0%,2% 100%,3% 15%,4% 100%,5% 5%,6% 100%,7% 20%,8% 100%,9% 0%,10% 100%,11% 10%,12% 100%,13% 25%,14% 100%,15% 5%,16% 100%,17% 15%,18% 100%,19% 0%,20% 100%,21% 20%,22% 100%,23% 8%,24% 100%,25% 0%,26% 100%,27% 18%,28% 100%,29% 5%,30% 100%,31% 12%,32% 100%,33% 0%,34% 100%,35% 22%,36% 100%,37% 8%,38% 100%,39% 0%,40% 100%,41% 15%,42% 100%,43% 5%,44% 100%,45% 20%,46% 100%,47% 0%,48% 100%,49% 10%,50% 100%,51% 25%,52% 100%,53% 5%,54% 100%,55% 15%,56% 100%,57% 0%,58% 100%,59% 22%,60% 100%,61% 8%,62% 100%,63% 0%,64% 100%,65% 15%,66% 100%,67% 5%,68% 100%,69% 20%,70% 100%,71% 0%,72% 100%,73% 10%,74% 100%,75% 25%,76% 100%,77% 5%,78% 100%,79% 15%,80% 100%,81% 0%,82% 100%,83% 20%,84% 100%,85% 8%,86% 100%,87% 0%,88% 100%,89% 18%,90% 100%,91% 5%,92% 100%,93% 12%,94% 100%,95% 0%,96% 100%,97% 20%,98% 100%,99% 5%,100% 100%);}
 
-    @keyframes fadeUp {
-      from { opacity:0; transform: translateY(24px); }
-      to   { opacity:1; transform: translateY(0); }
-    }
+    .paper-rose{position:absolute;font-size:clamp(20px,3.5vw,36px);opacity:.5;filter:drop-shadow(0 2px 8px rgba(192,68,106,.35));line-height:1;transition:transform .3s,opacity .3s;cursor:default;}
+    .paper-rose:hover{opacity:.95;transform:scale(1.4) rotate(12deg) !important;}
+    .paper-rose.tl{top:16px;left:18px;}
+    .paper-rose.tr{top:16px;right:18px;transform:scaleX(-1);}
+    .paper-rose.bl{bottom:18px;left:18px;}
+    .paper-rose.br{bottom:18px;right:18px;transform:scaleX(-1);}
 
-    /* scroll hint */
-    .scroll-hint {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      opacity: 0;
-      animation: fadeUp 1s 1.8s forwards;
-      color: rgba(255,255,255,0.3);
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
-    .scroll-arrow {
-      width: 20px; height: 20px;
-      border-right: 2px solid rgba(255,255,255,0.3);
-      border-bottom: 2px solid rgba(255,255,255,0.3);
-      transform: rotate(45deg);
-      animation: bounce 1.5s ease-in-out infinite;
-    }
-    @keyframes bounce {
-      0%,100% { transform: rotate(45deg) translateY(0); }
-      50%      { transform: rotate(45deg) translateY(6px); }
-    }
+    /* scroll reveal */
+    .reveal,.reveal-left,.reveal-right{transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1);}
+    .reveal{opacity:0;transform:translateY(34px);}
+    .reveal-left{opacity:0;transform:translateX(-34px);}
+    .reveal-right{opacity:0;transform:translateX(34px);}
+    .reveal.in,.reveal-left.in,.reveal-right.in{opacity:1;transform:translate(0);}
 
-    /* ── LETTER SECTION ── */
-    .letter-section {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0 16px 80px;
-    }
+    /* letter head */
+    .letter-head{text-align:center;margin-bottom:42px;}
+    .letter-ornament{font-size:20px;color:var(--gold);letter-spacing:14px;margin-bottom:12px;animation:shimmer 3s ease-in-out infinite;}
+    @keyframes shimmer{0%,100%{filter:brightness(1);}50%{filter:brightness(1.5) drop-shadow(0 0 10px rgba(201,149,106,.65));}}
+    .letter-subtitle{font-family:'Dancing Script',cursive;font-size:clamp(17px,3vw,25px);color:var(--rose);letter-spacing:1px;}
+    .letter-date{text-align:right;font-family:'Lora',serif;font-style:italic;font-size:14px;color:var(--gold);margin-bottom:32px;opacity:.8;}
+    .salutation{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,34px);font-style:italic;color:var(--rose);margin-bottom:32px;padding-bottom:18px;border-bottom:1px solid rgba(192,68,106,.18);position:relative;}
+    .salutation::after{content:'';position:absolute;bottom:-1px;left:0;width:60px;height:3px;background:linear-gradient(90deg,var(--rose),transparent);border-radius:2px;}
 
-    /* decorative strip */
-    .strip {
-      width: 100%;
-      max-width: 760px;
-      height: 6px;
-      background: linear-gradient(90deg, transparent, var(--rose) 30%, var(--gold) 70%, transparent);
-      margin-bottom: 0;
-      border-radius: 3px;
-      opacity: 0.7;
-    }
-
-    /* paper card */
-    .paper {
-      position: relative;
-      max-width: 760px;
-      width: 100%;
-      background: var(--cream);
-      border-radius: 0 0 16px 16px;
-      box-shadow:
-        0 4px 6px rgba(0,0,0,0.15),
-        0 20px 60px rgba(0,0,0,0.4),
-        0 60px 120px rgba(0,0,0,0.3),
-        inset 0 0 80px rgba(245,230,216,0.3);
-      padding: clamp(32px,6vw,72px) clamp(24px,7vw,80px) clamp(40px,6vw,72px);
-      background-image:
-        linear-gradient(rgba(192,68,106,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(192,68,106,0.01) 1px, transparent 1px);
-      background-size: 100% 38px, 38px 100%;
-    }
-
-    /* torn top edge illusion */
-    .paper::before {
-      content: '';
-      position: absolute;
-      top: -2px; left: 0; right: 0;
-      height: 8px;
-      background: var(--cream);
-      border-radius: 0;
-      clip-path: polygon(0% 100%, 1% 0%, 3% 100%, 5% 10%, 7% 100%, 9% 20%, 11% 100%, 13% 5%, 15% 100%, 17% 15%, 19% 100%, 21% 0%, 23% 100%, 25% 20%, 27% 100%, 29% 10%, 31% 100%, 33% 5%, 35% 100%, 37% 15%, 39% 100%, 41% 0%, 43% 100%, 45% 20%, 47% 100%, 49% 10%, 51% 100%, 53% 5%, 55% 100%, 57% 15%, 59% 100%, 61% 0%, 63% 100%, 65% 20%, 67% 100%, 69% 10%, 71% 100%, 73% 5%, 75% 100%, 77% 15%, 79% 100%, 81% 0%, 83% 100%, 85% 20%, 87% 100%, 89% 10%, 91% 100%, 93% 5%, 95% 100%, 97% 15%, 99% 100%, 100% 100%);
-    }
-
-    /* corner roses */
-    .paper-rose {
-      position: absolute;
-      font-size: clamp(22px, 4vw, 36px);
-      opacity: 0.55;
-      filter: drop-shadow(0 2px 8px rgba(192,68,106,0.3));
-      line-height: 1;
-    }
-    .paper-rose.tl { top: 18px; left: 20px; }
-    .paper-rose.tr { top: 18px; right: 20px; transform: scaleX(-1); }
-    .paper-rose.bl { bottom: 20px; left: 20px; }
-    .paper-rose.br { bottom: 20px; right: 20px; transform: scaleX(-1); }
-
-    /* ── LETTER TYPOGRAPHY ── */
-    .letter-head {
-      text-align: center;
-      margin-bottom: 36px;
-    }
-
-    .letter-ornament {
-      font-size: 18px;
-      color: var(--gold);
-      letter-spacing: 12px;
-      margin-bottom: 10px;
-    }
-
-    .letter-subtitle {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(16px, 3vw, 22px);
-      color: var(--rose);
-      letter-spacing: 1px;
-    }
-
-    .letter-date {
-      text-align: right;
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: 14px;
-      color: var(--gold);
-      margin-bottom: 28px;
-      opacity: 0.8;
-    }
-
-    .salutation {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(22px, 4vw, 32px);
-      font-style: italic;
-      color: var(--rose);
-      margin-bottom: 28px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(192,68,106,0.15);
-    }
-
-    .letter-body p {
-      font-family: 'Lora', serif;
-      font-size: clamp(15px, 2.2vw, 17px);
-      line-height: 2;
-      color: var(--ink);
-      margin-bottom: 22px;
-      text-align: justify;
-    }
-
-    .letter-body p.key-line {
-      font-style: italic;
-      font-size: clamp(16px, 2.5vw, 19px);
-      color: var(--rose);
-      text-align: center;
-      padding: 8px 0;
-      font-family: 'Playfair Display', serif;
-    }
+    /* body */
+    .letter-body p{font-family:'Lora',serif;font-size:clamp(15px,2.2vw,17.5px);line-height:2.05;color:var(--ink);margin-bottom:24px;text-align:justify;}
+    .key-line{font-style:italic;font-size:clamp(16px,2.5vw,20px) !important;color:var(--rose) !important;text-align:center !important;padding:12px 8px;font-family:'Playfair Display',serif !important;background:linear-gradient(135deg,rgba(192,68,106,.05),rgba(201,149,106,.05));border-radius:10px;}
 
     /* stanza */
-    .stanza {
-      margin: 28px 0 28px clamp(16px, 4vw, 48px);
-      padding-left: clamp(12px, 3vw, 24px);
-      border-left: 3px solid;
-      border-image: linear-gradient(to bottom, var(--rose-light), var(--gold)) 1;
-      position: relative;
-    }
+    .stanza{margin:28px 0 28px clamp(12px,4vw,50px);padding-left:clamp(12px,3vw,26px);border-left:3px solid transparent;border-image:linear-gradient(to bottom,var(--rose-light),var(--gold)) 1;position:relative;}
+    .stanza::before{content:'\275D';position:absolute;top:-8px;left:-14px;font-size:20px;color:var(--rose-light);opacity:.35;}
+    .stanza p{font-style:italic;font-size:clamp(14px,2vw,16.5px) !important;line-height:1.88 !important;color:#6b3d50 !important;margin-bottom:7px !important;text-align:left !important;}
 
-    .stanza p {
-      font-style: italic;
-      font-size: clamp(14px, 2vw, 16px) !important;
-      line-height: 1.8 !important;
-      color: var(--ink-soft) !important;
-      margin-bottom: 6px !important;
-      text-align: left !important;
-    }
+    /* ══════ ANIME CARDS ══════ */
+    .anime-card{position:relative;margin:38px 0;border-radius:22px;overflow:hidden;box-shadow:0 14px 52px rgba(0,0,0,.22),0 0 0 1px rgba(192,68,106,.13);transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s;}
+    .anime-card:hover{transform:translateY(-8px) scale(1.015);box-shadow:0 28px 80px rgba(0,0,0,.3),0 0 0 2px rgba(192,68,106,.28);}
+    .anime-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--rose),var(--gold),transparent);transform:scaleX(0);transition:transform .55s ease;transform-origin:left;}
+    .anime-card:hover::after{transform:scaleX(1);}
 
-    /* quote */
-    .quote-block {
-      position: relative;
-      margin: 32px 0;
-      padding: 22px 24px 18px 32px;
-      background: linear-gradient(135deg, rgba(192,68,106,0.06) 0%, rgba(201,149,106,0.06) 100%);
-      border-radius: 12px;
-      border: 1px solid rgba(192,68,106,0.15);
-    }
+    .card-img-wrap{width:100%;height:clamp(200px,35vw,340px);overflow:hidden;position:relative;}
+    .card-img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .65s ease;}
+    .anime-card:hover .card-img{transform:scale(1.06);}
 
-    .quote-block::before {
-      content: '\201C';
-      position: absolute;
-      top: -10px; left: 16px;
-      font-family: 'Playfair Display', serif;
-      font-size: 72px;
-      color: var(--rose);
-      opacity: 0.2;
-      line-height: 1;
-    }
+    /* SVG anime illustration fallback */
+    .card-svg-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
 
-    .quote-text {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: clamp(15px, 2.2vw, 17px);
-      color: var(--ink-soft);
-      line-height: 1.8;
-      margin-bottom: 10px;
-    }
-
-    .quote-source {
-      font-family: 'Dancing Script', cursive;
-      font-size: 16px;
-      color: var(--rose);
-      text-align: right;
-    }
+    .card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,3,8,.95) 0%,rgba(12,3,8,.5) 40%,rgba(12,3,8,.1) 100%);}
+    .card-content{position:absolute;bottom:0;left:0;right:0;padding:clamp(18px,4vw,38px);}
+    .quote-badge{display:inline-block;background:rgba(192,68,106,.88);color:#fff;font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;padding:5px 14px;border-radius:20px;margin-bottom:14px;backdrop-filter:blur(4px);}
+    .card-quote-text{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(15px,2.3vw,19px);color:rgba(255,255,255,.95);line-height:1.7;margin-bottom:12px;text-shadow:0 2px 10px rgba(0,0,0,.6);}
+    .card-quote-src{font-family:'Dancing Script',cursive;font-size:18px;color:var(--rose-light);text-shadow:0 1px 6px rgba(0,0,0,.5);}
 
     /* closing */
-    .closing {
-      margin-top: 44px;
-      padding-top: 28px;
-      border-top: 1px solid rgba(192,68,106,0.12);
-    }
+    .closing{margin-top:52px;padding-top:32px;border-top:1px solid rgba(192,68,106,.15);}
+    .closing .sign-off{font-family:'Lora',serif;font-style:italic;font-size:17px;color:#7a4f5a;margin-bottom:8px;}
+    .closing .name{font-family:'Dancing Script',cursive;font-size:clamp(44px,7vw,68px);color:var(--rose);margin-top:10px;filter:drop-shadow(0 3px 18px rgba(192,68,106,.35));animation:nameGlow 3.5s ease-in-out infinite;}
+    @keyframes nameGlow{0%,100%{filter:drop-shadow(0 3px 18px rgba(192,68,106,.35));}50%{filter:drop-shadow(0 3px 32px rgba(192,68,106,.7));}}
 
-    .closing .sign-off {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: 16px;
-      color: var(--ink-soft);
-      margin-bottom: 6px;
-    }
+    .bottom-ornament{text-align:center;margin-top:50px;font-size:22px;color:var(--gold);letter-spacing:16px;opacity:.65;animation:shimmer 4s ease-in-out infinite;}
 
-    .closing .name {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(36px, 6vw, 52px);
-      color: var(--rose);
-      margin-top: 8px;
-      filter: drop-shadow(0 2px 12px rgba(192,68,106,0.25));
-    }
+    .footer-hearts{position:relative;z-index:2;text-align:center;padding:40px 20px 60px;color:rgba(255,255,255,.22);font-family:'Dancing Script',cursive;font-size:17px;letter-spacing:1px;display:none;}
 
-    .bottom-ornament {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 20px;
-      color: var(--gold);
-      letter-spacing: 14px;
-      opacity: 0.6;
-    }
+    .paper-reveal{animation:paperReveal .95s cubic-bezier(.22,1,.36,1) forwards;}
+    @keyframes paperReveal{from{opacity:0;transform:translateY(56px) scale(.95);}to{opacity:1;transform:translateY(0) scale(1);}}
 
-    /* ── HEARTS FOOTER ── */
-    .footer-hearts {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 40px 20px 60px;
-      color: rgba(255,255,255,0.2);
-      font-family: 'Dancing Script', cursive;
-      font-size: 16px;
-      letter-spacing: 1px;
-    }
-
-    /* ── FLOATING PETALS ── */
-    .petals-container {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    .petal {
-      position: absolute;
-      top: -60px;
-      border-radius: 150% 0 150% 0;
-      opacity: 0;
-      animation: fall linear infinite;
-    }
-
-    @keyframes fall {
-      0%   { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
-      10%  { opacity: 0.7; }
-      90%  { opacity: 0.5; }
-      100% { transform: translateY(110vh) rotate(720deg) translateX(80px); opacity: 0; }
-    }
-
-    /* ── HIDDEN STATE ── */
-    .letter-section { display: none; }
-    .letter-section.visible { display: flex; }
-
-    /* ── TRANSITION OVERLAY ── */
-    .transition-overlay {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(ellipse at center, rgba(192,68,106,0.8) 0%, #1a0a12 100%);
-      z-index: 100;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.6s ease;
-    }
-    .transition-overlay.show { opacity: 1; pointer-events: all; }
-
-    /* reveal animation for letter */
-    .paper-reveal {
-      animation: paperReveal 0.8s cubic-bezier(0.22,1,0.36,1) forwards;
-    }
-    @keyframes paperReveal {
-      from { opacity:0; transform: translateY(40px) scale(0.97); }
-      to   { opacity:1; transform: translateY(0) scale(1); }
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 480px) {
-      .paper { padding: 48px 20px 40px; }
-      .paper-rose { font-size: 20px; }
-      .stanza { margin-left: 12px; }
-    }
+    @media(max-width:520px){.paper{padding:44px 18px 40px;}.stanza{margin-left:10px;}.ring1,.ring2,.ring3{display:none;}}
   </style>
 </head>
 <body>
 
+<div class="cursor-heart" id="cursor">💗</div>
 <canvas id="bg-canvas"></canvas>
-
-<!-- Floating petals -->
 <div class="petals-container" id="petals"></div>
-
-<!-- Transition overlay -->
 <div class="transition-overlay" id="overlay"></div>
 
-<!-- ═══ HERO ═══ -->
+<!-- ══════════════ HERO ══════════════ -->
 <section class="hero" id="hero">
   <div class="hero-glow"></div>
+  <div class="ring ring1"></div>
+  <div class="ring ring2"></div>
+  <div class="ring ring3"></div>
 
-  <div class="envelope-icon">💌</div>
-  <div class="hero-label">A message from the heart</div>
-  <h1 class="hero-title">For <span>Zainab</span><br>Fatima</h1>
+  <div class="envelope-wrap">
+    <span class="sp sp1">✨</span>
+    <span class="sp sp2">🌸</span>
+    <span class="sp sp3">✦</span>
+    <span class="envelope-icon">💌</span>
+  </div>
+
+  <div class="hero-label">a message written with the heart</div>
+  <h1 class="hero-title">A Heart That<br>Only Knows<br><span class="accent">Your Name</span></h1>
+  <div class="hero-tagline">for zainab fatima &nbsp;✦&nbsp; march 2026</div>
   <p class="hero-sub">Something honest. Something sincere. Something long overdue.</p>
 
-  <button class="open-btn" onclick="openLetter()">
-    🌹 Open the Letter
-  </button>
+  <button class="open-btn" onclick="openLetter()">🌹 &nbsp;Open the Letter&nbsp; 🌹</button>
 
   <div class="scroll-hint">
     <div class="scroll-arrow"></div>
@@ -478,39 +181,30 @@
   </div>
 </section>
 
-<!-- ═══ LETTER ═══ -->
+<!-- ══════════════ LETTER ══════════════ -->
 <section class="letter-section" id="letter-section">
-
   <div class="strip"></div>
-
   <div class="paper" id="paper">
     <span class="paper-rose tl">🌹</span>
     <span class="paper-rose tr">🌹</span>
     <span class="paper-rose bl">🌸</span>
     <span class="paper-rose br">🌸</span>
 
-    <div class="letter-head">
+    <div class="letter-head reveal">
       <div class="letter-ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
       <div class="letter-subtitle">— &nbsp; A Letter From the Heart &nbsp; —</div>
     </div>
-
-    <div class="letter-date">March 2026</div>
-
-    <div class="salutation">Dear Zainab Fatima,</div>
+    <div class="letter-date reveal">March 2026</div>
+    <div class="salutation reveal">Dear Zainab Fatima,</div>
 
     <div class="letter-body">
+      <p class="reveal">I don't know if I will ever be able to explain everything my heart feels for you, but today I want to try. I have kept many things inside my heart for a long time, and sometimes silence becomes too painful. So I am writing these words honestly — not perfectly, but sincerely.</p>
+      <p class="reveal">Zainab, I know you have been through things that changed you. I can see how sometimes you become quiet, distant, and lost in your own thoughts. Sometimes you choose to be alone; sometimes it feels as though you hide your feelings from everyone. Maybe you are protecting your heart. Maybe life hurt you in ways I cannot fully understand.</p>
+      <p class="reveal">And I respect that deeply.</p>
+      <p class="reveal">But there is one question that has lived in my heart for a very long time —</p>
+      <p class="key-line reveal">Can you not become normal with just one person… the one who still loves you after all these years?</p>
 
-      <p>I don't know if I will ever be able to explain everything my heart feels for you, but today I want to try. I have kept many things inside my heart for a long time, and sometimes silence becomes too painful. So I am writing these words honestly — not perfectly, but sincerely.</p>
-
-      <p>Zainab, I know you have been through things that changed you. I can see how sometimes you become quiet, distant, and lost in your own thoughts. Sometimes you choose to be alone; sometimes it feels as though you hide your feelings from everyone. Maybe you are protecting your heart. Maybe life hurt you in ways I cannot fully understand.</p>
-
-      <p>And I respect that deeply.</p>
-
-      <p>But there is one question that has lived in my heart for a very long time —</p>
-
-      <p class="key-line">Can you not become normal with just one person… the one who still loves you after all these years?</p>
-
-      <div class="stanza">
+      <div class="stanza reveal-left">
         <p>The one who stayed even during your hardest times.</p>
         <p>The one who always tried to make you smile.</p>
         <p>The one who never cared about who you were or what people said.</p>
@@ -519,211 +213,406 @@
         <p>The one who cried because of you.</p>
         <p>The one who never wants to see you hurt or struggling.</p>
       </div>
-
-      <div class="stanza">
+      <div class="stanza reveal-left">
         <p>Even if you don't talk much…</p>
         <p>Even if you stay distant…</p>
         <p>Even if the world leaves you alone…</p>
       </div>
 
-      <p>I would still stay beside you.</p>
+      <p class="reveal">I would still stay beside you.</p>
+      <p class="reveal">Because loving you was never something temporary for me.</p>
+      <p class="reveal">Zainab, I also have a heart. I also have feelings. For a long time I tried to hide them because I didn't want to make things difficult for you. But the truth is, I cannot pretend anymore. My heart still belongs to you, and living without you feels like something inside me is missing.</p>
+      <p class="reveal">If I ever hurt you in any way, please believe me when I say I am truly sorry. I never wanted to be the reason for your pain. Sometimes people make mistakes not because they don't care, but because they don't know how to express their love properly.</p>
+      <p class="reveal">From today, I don't want to just make empty promises.</p>
 
-      <p>Because loving you was never something temporary for me.</p>
-
-      <p>Zainab, I also have a heart. I also have feelings. For a long time I tried to hide them because I didn't want to make things difficult for you. But the truth is, I cannot pretend anymore. My heart still belongs to you, and living without you feels like something inside me is missing.</p>
-
-      <p>If I ever hurt you in any way, please believe me when I say I am truly sorry. I never wanted to be the reason for your pain. Sometimes people make mistakes not because they don't care, but because they don't know how to express their love properly.</p>
-
-      <p>From today, I don't want to just make empty promises.</p>
-
-      <div class="stanza">
+      <div class="stanza reveal-right">
         <p>I want to become someone you can truly believe in.</p>
         <p>Someone who protects your heart instead of hurting it.</p>
         <p>Someone who stays when things are difficult, not only when they are easy.</p>
       </div>
-
-      <div class="stanza">
+      <div class="stanza reveal-right">
         <p>I will try to be patient with you.</p>
         <p>I will respect your silence.</p>
         <p>I will support you even when you push everyone away.</p>
       </div>
 
-      <p>Because you matter to me more than you probably realize.</p>
+      <p class="reveal">Because you matter to me more than you probably realize.</p>
+      <p class="reveal">Sometimes I feel like God created my heart in a way that it only knows your name. How could I look at another when my soul already chose you? It feels impossible. Even the thought of loving someone else feels wrong to me.</p>
+      <p class="reveal">You are the only person my heart truly wants.</p>
 
-      <p>Sometimes I feel like God created my heart in a way that it only knows your name. How could I look at another when my soul already chose you? It feels impossible. Even the thought of loving someone else feels wrong to me.</p>
-
-      <p>You are the only person my heart truly wants.</p>
-
-      <div class="quote-block">
-        <div class="quote-text">"If it's possible for one person to be hurt by another, then it's possible for that person to be healed by another."</div>
-        <div class="quote-source">— Fruits Basket</div>
+      <!-- FRUITS BASKET CARD -->
+      <div class="anime-card reveal">
+        <div class="card-img-wrap">
+          <!-- Beautiful painted SVG scene: two figures under cherry blossoms - healing & warmth -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" style="width:100%;height:100%;display:block;">
+            <defs>
+              <radialGradient id="sky1" cx="50%" cy="0%" r="100%">
+                <stop offset="0%" stop-color="#ffd6e8"/>
+                <stop offset="60%" stop-color="#ffb3cc"/>
+                <stop offset="100%" stop-color="#e87fa8"/>
+              </radialGradient>
+              <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#fff" stop-opacity=".5"/>
+                <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="blur1"><feGaussianBlur stdDeviation="8"/></filter>
+              <filter id="blur2"><feGaussianBlur stdDeviation="3"/></filter>
+              <filter id="softGlow"><feGaussianBlur stdDeviation="12" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <!-- Sky -->
+            <rect width="900" height="340" fill="url(#sky1)"/>
+            <!-- Soft light orb -->
+            <ellipse cx="450" cy="120" rx="200" ry="150" fill="url(#glow1)" filter="url(#blur1)" opacity=".7"/>
+            <!-- Ground -->
+            <ellipse cx="450" cy="380" rx="500" ry="120" fill="#e86090" opacity=".25"/>
+            <rect x="0" y="290" width="900" height="50" fill="#c9446a" opacity=".2" rx="0"/>
+            <!-- Cherry blossom trees -->
+            <g filter="url(#blur2)" opacity=".85">
+              <!-- Left tree trunk -->
+              <rect x="90" y="180" width="18" height="160" fill="#7a3a2a" rx="4"/>
+              <rect x="100" y="140" width="12" height="100" fill="#7a3a2a" rx="4" transform="rotate(-20,100,140)"/>
+              <!-- Left blossom clusters -->
+              <ellipse cx="80" cy="150" rx="55" ry="45" fill="#ffb3cc" opacity=".9"/>
+              <ellipse cx="120" cy="130" rx="48" ry="38" fill="#ffd6e8" opacity=".85"/>
+              <ellipse cx="60" cy="130" rx="42" ry="35" fill="#ff8fb0" opacity=".8"/>
+              <ellipse cx="100" cy="110" rx="50" ry="40" fill="#ffcce0" opacity=".9"/>
+              <!-- Right tree trunk -->
+              <rect x="790" y="190" width="18" height="150" fill="#7a3a2a" rx="4"/>
+              <rect x="800" y="150" width="12" height="100" fill="#7a3a2a" rx="4" transform="rotate(18,800,150)"/>
+              <!-- Right blossom clusters -->
+              <ellipse cx="820" cy="155" rx="55" ry="45" fill="#ffb3cc" opacity=".9"/>
+              <ellipse cx="780" cy="135" rx="48" ry="38" fill="#ffd6e8" opacity=".85"/>
+              <ellipse cx="840" cy="135" rx="42" ry="35" fill="#ff8fb0" opacity=".8"/>
+              <ellipse cx="800" cy="115" rx="50" ry="40" fill="#ffcce0" opacity=".9"/>
+            </g>
+            <!-- Falling petals -->
+            <g opacity=".9">
+              <ellipse cx="200" cy="80" rx="5" ry="3" fill="#ffb3cc" transform="rotate(30,200,80)"/>
+              <ellipse cx="320" cy="50" rx="4" ry="2.5" fill="#ffd6e8" transform="rotate(-20,320,50)"/>
+              <ellipse cx="560" cy="70" rx="5" ry="3" fill="#ffb3cc" transform="rotate(45,560,70)"/>
+              <ellipse cx="680" cy="40" rx="4" ry="2.5" fill="#ff8fb0" transform="rotate(-30,680,40)"/>
+              <ellipse cx="430" cy="55" rx="5" ry="3" fill="#ffcce0" transform="rotate(15,430,55)"/>
+              <ellipse cx="150" cy="200" rx="4" ry="2.5" fill="#ffd6e8" transform="rotate(60,150,200)"/>
+              <ellipse cx="750" cy="180" rx="5" ry="3" fill="#ffb3cc" transform="rotate(-40,750,180)"/>
+              <ellipse cx="380" cy="170" rx="4" ry="2.5" fill="#ffcce0" transform="rotate(25,380,170)"/>
+            </g>
+            <!-- Two figures sitting together -->
+            <g filter="url(#softGlow)">
+              <!-- Shadow -->
+              <ellipse cx="450" cy="305" rx="90" ry="14" fill="#c0446a" opacity=".25" filter="url(#blur2)"/>
+              <!-- Figure left (girl) -->
+              <g transform="translate(400,220)">
+                <ellipse cx="0" cy="-2" rx="18" ry="18" fill="#ffe0b0"/><!-- head -->
+                <path d="M-18,-5 Q-22,20 -18,70 Q0,75 18,70 Q22,20 18,-5 Z" fill="#e8829a"/><!-- body/dress -->
+                <path d="M-14,68 Q-14,85 -10,85 Q-6,85 -6,68 Z" fill="#3a1a28"/><!-- leg left -->
+                <path d="M6,68 Q6,85 10,85 Q14,85 14,68 Z" fill="#3a1a28"/><!-- leg right -->
+                <!-- Hair -->
+                <path d="M-17,-18 Q-8,-28 0,-30 Q8,-28 17,-18 Q20,-5 18,5 Q8,-10 0,-12 Q-8,-10 -18,5 Q-20,-5 -17,-18 Z" fill="#2d1a10"/>
+                <path d="M-18,-5 Q-28,20 -25,55 Q-18,50 -18,40 Z" fill="#2d1a10"/><!-- long hair left -->
+                <!-- blush -->
+                <ellipse cx="-10" cy="5" rx="5" ry="3" fill="#ff8fb0" opacity=".5"/>
+                <ellipse cx="10" cy="5" rx="5" ry="3" fill="#ff8fb0" opacity=".5"/>
+                <!-- arm reaching to right figure -->
+                <path d="M16,20 Q40,30 52,35" stroke="#ffe0b0" stroke-width="7" fill="none" stroke-linecap="round"/>
+              </g>
+              <!-- Figure right (boy) -->
+              <g transform="translate(502,225)">
+                <ellipse cx="0" cy="-2" rx="18" ry="18" fill="#ffe0b0"/><!-- head -->
+                <path d="M-18,-4 Q-22,18 -18,65 Q0,70 18,65 Q22,18 18,-4 Z" fill="#4a6fa5"/><!-- shirt -->
+                <path d="M-18,38 Q-22,65 -14,65 Z" fill="#3a5a8a"/><!-- shirt detail -->
+                <path d="M-14,63 Q-14,80 -10,80 Q-6,80 -6,63 Z" fill="#1a1a2a"/>
+                <path d="M6,63 Q6,80 10,80 Q14,80 14,63 Z" fill="#1a1a2a"/>
+                <!-- Hair short -->
+                <path d="M-16,-18 Q0,-28 16,-18 Q20,-8 18,0 Q8,-14 0,-15 Q-8,-14 -18,0 Q-20,-8 -16,-18 Z" fill="#2d1a10"/>
+                <!-- arm toward left figure -->
+                <path d="M-16,18 Q-38,28 -50,33" stroke="#ffe0b0" stroke-width="7" fill="none" stroke-linecap="round"/>
+                <!-- blush -->
+                <ellipse cx="10" cy="5" rx="5" ry="3" fill="#ff8fb0" opacity=".4"/>
+              </g>
+              <!-- Joined hands in center -->
+              <ellipse cx="452" cy="258" rx="12" ry="7" fill="#ffe0b0" opacity=".95"/>
+              <!-- Small heart above -->
+              <text x="450" y="195" text-anchor="middle" font-size="22" opacity=".9" filter="url(#softGlow)">💗</text>
+            </g>
+          </svg>
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <span class="quote-badge">🌸 FRUITS BASKET</span>
+          <div class="card-quote-text">"If it's possible for one person to be hurt by another, then it's possible for that person to be healed by another."</div>
+          <div class="card-quote-src">— Fruits Basket</div>
+        </div>
       </div>
 
-      <p>Maybe I cannot fix everything in your life, but if I could help ease even a little of your pain, I would do it without hesitation.</p>
+      <p class="reveal">Maybe I cannot fix everything in your life, but if I could help ease even a little of your pain, I would do it without hesitation.</p>
 
-      <div class="quote-block">
-        <div class="quote-text">"No matter how deep the night, it always turns to day eventually."</div>
-        <div class="quote-source">— One Piece</div>
+      <!-- ONE PIECE CARD -->
+      <div class="anime-card reveal">
+        <div class="card-img-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" style="width:100%;height:100%;display:block;">
+            <defs>
+              <linearGradient id="nightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#0a0520"/>
+                <stop offset="40%" stop-color="#1a0a40"/>
+                <stop offset="70%" stop-color="#2d1055"/>
+                <stop offset="100%" stop-color="#c0446a" stop-opacity=".4"/>
+              </linearGradient>
+              <radialGradient id="moon" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#fff8e0"/>
+                <stop offset="70%" stop-color="#ffe4a0"/>
+                <stop offset="100%" stop-color="#ffd060"/>
+              </radialGradient>
+              <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#fff8e0" stop-opacity=".4"/>
+                <stop offset="100%" stop-color="#fff8e0" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="starGlow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="moonBlur"><feGaussianBlur stdDeviation="18"/></filter>
+            </defs>
+            <rect width="900" height="340" fill="url(#nightSky)"/>
+            <!-- Moon glow -->
+            <ellipse cx="700" cy="80" rx="120" ry="120" fill="url(#moonGlow)" filter="url(#moonBlur)" opacity=".8"/>
+            <!-- Moon -->
+            <circle cx="700" cy="80" r="54" fill="url(#moon)" filter="url(#starGlow)"/>
+            <circle cx="720" cy="60" r="44" fill="#1a0a40" opacity=".18"/><!-- crescent shadow -->
+            <!-- Stars -->
+            <g fill="#fff" filter="url(#starGlow)" opacity=".9">
+              <circle cx="50" cy="30" r="1.5"/><circle cx="130" cy="60" r="1"/><circle cx="200" cy="20" r="2"/><circle cx="280" cy="45" r="1.5"/>
+              <circle cx="380" cy="25" r="1"/><circle cx="460" cy="55" r="2"/><circle cx="540" cy="15" r="1.5"/><circle cx="620" cy="40" r="1"/>
+              <circle cx="160" cy="100" r="1"/><circle cx="300" cy="80" r="1.5"/><circle cx="420" cy="95" r="1"/><circle cx="520" cy="70" r="2"/>
+              <circle cx="80" cy="140" r="1.5"/><circle cx="240" cy="130" r="1"/><circle cx="480" cy="120" r="1.5"/><circle cx="820" cy="30" r="1.5"/>
+              <circle cx="850" cy="100" r="1"/><circle cx="770" cy="140" r="2"/>
+            </g>
+            <!-- Ocean reflection -->
+            <rect x="0" y="240" width="900" height="100" fill="#1a0a40" opacity=".7"/>
+            <path d="M0,240 Q150,230 300,240 Q450,250 600,240 Q750,230 900,240 L900,340 L0,340 Z" fill="#0d0528" opacity=".8"/>
+            <!-- Moon path on water -->
+            <path d="M620,260 Q700,255 780,260 Q700,265 620,260 Z" fill="#ffe4a0" opacity=".35"/>
+            <path d="M640,270 Q700,267 760,270 Q700,273 640,270 Z" fill="#ffe4a0" opacity=".25"/>
+            <path d="M660,280 Q700,278 740,280 Q700,282 660,280 Z" fill="#ffe4a0" opacity=".15"/>
+            <!-- Horizon glow -->
+            <path d="M0,240 Q450,200 900,240" stroke="#c0446a" stroke-width="2" fill="none" opacity=".3"/>
+            <ellipse cx="450" cy="240" rx="300" ry="30" fill="#c0446a" opacity=".1" filter="url(#moonBlur)"/>
+            <!-- Figure silhouette on cliff/boat -->
+            <g transform="translate(450,200)" opacity=".95">
+              <!-- Sitting person looking at moon -->
+              <ellipse cx="0" cy="-22" rx="14" ry="14" fill="#1a0528"/><!-- head -->
+              <path d="M-12,-12 Q-16,10 -12,40 Q0,44 12,40 Q16,10 12,-12 Z" fill="#2a0a3a"/><!-- body -->
+              <!-- wild hair -->
+              <path d="M-14,-34 Q0,-46 14,-34 Q18,-22 14,-14 Q6,-26 0,-28 Q-6,-26 -14,-14 Q-18,-22 -14,-34 Z" fill="#1a0528"/>
+              <path d="M-14,-14 Q-26,0 -24,30 Q-18,26 -16,20 Z" fill="#1a0528"/>
+              <path d="M14,-14 Q26,0 24,30 Q18,26 16,20 Z" fill="#1a0528"/>
+              <!-- legs dangling -->
+              <path d="M-8,40 Q-10,58 -8,60" stroke="#1a0528" stroke-width="8" fill="none" stroke-linecap="round"/>
+              <path d="M8,40 Q10,58 8,60" stroke="#1a0528" stroke-width="8" fill="none" stroke-linecap="round"/>
+              <!-- arm pointing to sky/moon -->
+              <path d="M12,5 Q30,-15 50,-28" stroke="#1a0528" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <!-- glowing aura -->
+              <ellipse cx="0" cy="10" rx="30" ry="40" fill="#c0446a" opacity=".08" filter="url(#moonBlur)"/>
+              <!-- small stars around -->
+              <text x="55" y="-30" font-size="14" fill="#ffe4a0" filter="url(#starGlow)">✦</text>
+              <text x="-60" y="-10" font-size="10" fill="#fff8e0" filter="url(#starGlow)" opacity=".7">✦</text>
+            </g>
+          </svg>
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <span class="quote-badge">⚓ ONE PIECE</span>
+          <div class="card-quote-text">"No matter how deep the night, it always turns to day eventually."</div>
+          <div class="card-quote-src">— One Piece</div>
+        </div>
       </div>
 
-      <p>Maybe right now life feels heavy for you, but I believe one day things will become lighter again.</p>
+      <p class="reveal">Maybe right now life feels heavy for you, but I believe one day things will become lighter again.</p>
 
-      <div class="quote-block">
-        <div class="quote-text">"I want to be with you. From now on, I want to spend all of my days until my death with you."</div>
-        <div class="quote-source">— Naruto</div>
+      <!-- NARUTO CARD -->
+      <div class="anime-card reveal">
+        <div class="card-img-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" style="width:100%;height:100%;display:block;">
+            <defs>
+              <linearGradient id="sunset" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#ff6b35"/>
+                <stop offset="30%" stop-color="#ff8c42"/>
+                <stop offset="60%" stop-color="#ffc16e"/>
+                <stop offset="100%" stop-color="#ffe4b0"/>
+              </linearGradient>
+              <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#fff5c0"/>
+                <stop offset="60%" stop-color="#ffcc44"/>
+                <stop offset="100%" stop-color="#ff8c00"/>
+              </radialGradient>
+              <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ff8c00" stop-opacity=".6"/>
+                <stop offset="100%" stop-color="#ff8c00" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="sunBlur"><feGaussianBlur stdDeviation="22"/></filter>
+              <filter id="softShadow"><feGaussianBlur stdDeviation="6"/></filter>
+              <filter id="narutoGlow"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect width="900" height="340" fill="url(#sunset)"/>
+            <!-- Sun glow -->
+            <ellipse cx="450" cy="210" rx="200" ry="180" fill="url(#sunGlow)" filter="url(#sunBlur)" opacity=".7"/>
+            <!-- Sun -->
+            <circle cx="450" cy="210" r="58" fill="url(#sun)" filter="url(#narutoGlow)"/>
+            <!-- Light rays -->
+            <g stroke="#ffcc44" stroke-width="2" opacity=".35">
+              <line x1="450" y1="145" x2="450" y2="80"/><line x1="492" y1="158" x2="535" y2="108"/><line x1="508" y1="195" x2="570" y2="180"/><line x1="492" y1="232" x2="535" y2="282"/>
+              <line x1="450" y1="275" x2="450" y2="330"/><line x1="408" y1="232" x2="365" y2="282"/><line x1="392" y1="195" x2="330" y2="180"/><line x1="408" y1="158" x2="365" y2="108"/>
+            </g>
+            <!-- Horizon / ground -->
+            <path d="M0,260 Q225,245 450,260 Q675,275 900,260 L900,340 L0,340 Z" fill="#cc4400" opacity=".45"/>
+            <rect x="0" y="280" width="900" height="60" fill="#8b2200" opacity=".4"/>
+            <!-- Two silhouettes standing together, close -->
+            <g filter="url(#narutoGlow)">
+              <!-- Shadow on ground -->
+              <ellipse cx="455" cy="295" rx="95" ry="12" fill="#cc4400" opacity=".35" filter="url(#softShadow)"/>
+              <!-- Right figure (taller) -->
+              <g transform="translate(475,195)">
+                <ellipse cx="0" cy="-22" rx="15" ry="15" fill="#1a0a00"/><!-- head -->
+                <!-- Spiky hair (Naruto style) -->
+                <path d="M-15,-34 Q-8,-50 0,-52 Q8,-50 15,-34 Q18,-22 15,-10 Q6,-30 0,-32 Q-6,-30 -15,-10 Q-18,-22 -15,-34 Z" fill="#1a0a00"/>
+                <path d="M-15,-30 Q-30,-20 -26,0 Z" fill="#1a0a00"/>
+                <path d="M15,-30 Q30,-20 26,0 Z" fill="#1a0a00"/>
+                <path d="M-12,-10 Q-16,12 -12,80 Q0,85 12,80 Q16,12 12,-10 Z" fill="#1a0a00"/>
+                <path d="M-12,78 L-10,100" stroke="#1a0a00" stroke-width="9" stroke-linecap="round"/>
+                <path d="M12,78 L10,100" stroke="#1a0a00" stroke-width="9" stroke-linecap="round"/>
+                <!-- arm around left figure -->
+                <path d="M-14,15 Q-38,20 -56,18" stroke="#1a0a00" stroke-width="7" fill="none" stroke-linecap="round"/>
+                <!-- golden glow -->
+                <ellipse cx="0" cy="20" rx="28" ry="50" fill="#ff8c00" opacity=".1" filter="url(#sunBlur)"/>
+              </g>
+              <!-- Left figure (shorter, leaning in) -->
+              <g transform="translate(420,205)">
+                <ellipse cx="0" cy="-20" rx="13" ry="13" fill="#1a0a00"/>
+                <!-- Long flowing hair -->
+                <path d="M-13,-30 Q0,-40 13,-30 Q16,-18 13,-8 Q4,-22 0,-24 Q-4,-22 -13,-8 Q-16,-18 -13,-30 Z" fill="#1a0a00"/>
+                <path d="M-13,-10 Q-28,20 -24,70 Q-16,60 -14,50 Z" fill="#1a0a00"/>
+                <path d="M13,-10 Q20,10 18,45 Z" fill="#1a0a00"/>
+                <path d="M-11,-8 Q-14,10 -11,72 Q0,76 11,72 Q14,10 11,-8 Z" fill="#1a0a00"/><!-- dress/body -->
+                <path d="M-11,70 L-9,92" stroke="#1a0a00" stroke-width="8" stroke-linecap="round"/>
+                <path d="M11,70 L9,92" stroke="#1a0a00" stroke-width="8" stroke-linecap="round"/>
+                <!-- reaching toward right figure -->
+                <path d="M12,12 Q32,16 48,14" stroke="#1a0a00" stroke-width="6" fill="none" stroke-linecap="round"/>
+              </g>
+              <!-- Heart between them -->
+              <text x="450" y="210" text-anchor="middle" font-size="24" fill="#ff6b35" filter="url(#narutoGlow)" opacity=".9">💛</text>
+            </g>
+            <!-- Leaf particles floating -->
+            <g fill="#cc6600" opacity=".6">
+              <ellipse cx="200" cy="160" rx="6" ry="3" transform="rotate(30,200,160)"/>
+              <ellipse cx="300" cy="120" rx="5" ry="2.5" transform="rotate(-20,300,120)"/>
+              <ellipse cx="620" cy="150" rx="6" ry="3" transform="rotate(45,620,150)"/>
+              <ellipse cx="730" cy="100" rx="5" ry="2.5" transform="rotate(-35,730,100)"/>
+              <ellipse cx="150" cy="220" rx="4" ry="2" transform="rotate(60,150,220)"/>
+              <ellipse cx="760" cy="200" rx="5" ry="2.5" transform="rotate(-25,760,200)"/>
+            </g>
+          </svg>
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <span class="quote-badge">🍃 NARUTO</span>
+          <div class="card-quote-text">"I want to be with you. From now on, I want to spend all of my days until my death with you."</div>
+          <div class="card-quote-src">— Naruto</div>
+        </div>
       </div>
 
-      <p>Zainab Fatima, I don't want to force you, and I don't want to change who you are. I just want you to know something simple and honest —</p>
+      <p class="reveal">Zainab Fatima, I don't want to force you, and I don't want to change who you are. I just want you to know something simple and honest —</p>
 
-      <div class="stanza">
+      <div class="stanza reveal-left">
         <p>I am the one who still wants you.</p>
         <p>My love is only for you.</p>
       </div>
-
-      <div class="stanza">
+      <div class="stanza reveal-left">
         <p>Even if you stay quiet.</p>
         <p>Even if you keep your distance.</p>
         <p>Even if you feel like no one understands you.</p>
       </div>
 
-      <p>I will still pray for your happiness.</p>
-      <p>Because loving you was never just a moment for me.</p>
-      <p>It became a part of who I am.</p>
+      <p class="reveal">I will still pray for your happiness.</p>
+      <p class="reveal">Because loving you was never just a moment for me.</p>
+      <p class="reveal">It became a part of who I am.</p>
+    </div>
 
-    </div><!-- /letter-body -->
-
-    <div class="closing">
+    <div class="closing reveal">
       <p class="sign-off">With all my heart,</p>
       <p class="sign-off">Your love —</p>
       <div class="name">Anas</div>
     </div>
-
-    <div class="bottom-ornament">✦ &nbsp; 🌹 &nbsp; 💕 &nbsp; 🌹 &nbsp; ✦</div>
-
-  </div><!-- /paper -->
+    <div class="bottom-ornament reveal">✦ &nbsp; 🌹 &nbsp; 💕 &nbsp; 🌹 &nbsp; ✦</div>
+  </div>
 </section>
 
-<div class="footer-hearts" id="footer-hearts" style="display:none">
-  written with love, sealed with prayer 🤍
-</div>
+<div class="footer-hearts" id="footer-hearts">written with love, sealed with prayer 🤍</div>
 
 <script>
-/* ── STARFIELD + BOKEH BACKGROUND ── */
+/* cursor */
+const cur = document.getElementById('cursor');
+document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
+
+/* canvas */
 const canvas = document.getElementById('bg-canvas');
-const ctx    = canvas.getContext('2d');
+const ctx = canvas.getContext('2d');
 let W, H;
+function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
 
-const stars = [];
-const bokeh = [];
-
-function resize() {
-  W = canvas.width  = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener('resize', resize);
-
-for (let i = 0; i < 160; i++) {
-  stars.push({
-    x: Math.random(), y: Math.random(),
-    r: Math.random() * 1.2 + 0.2,
-    a: Math.random(),
-    speed: Math.random() * 0.004 + 0.001,
-    phase: Math.random() * Math.PI * 2
-  });
-}
-
-for (let i = 0; i < 14; i++) {
-  bokeh.push({
-    x: Math.random(), y: Math.random(),
-    r: Math.random() * 80 + 30,
-    a: Math.random() * 0.12 + 0.03,
-    dx: (Math.random() - 0.5) * 0.0003,
-    dy: (Math.random() - 0.5) * 0.0002,
-    hue: Math.random() > 0.5 ? 340 : 25
-  });
-}
-
+const stars = Array.from({length:220}, ()=>({ x:Math.random(), y:Math.random(), r:Math.random()*1.4+.2, a:Math.random()*.85+.1, speed:Math.random()*.003+.0005, phase:Math.random()*Math.PI*2 }));
+const bokeh = Array.from({length:20}, ()=>({ x:Math.random(), y:Math.random(), r:Math.random()*95+28, a:Math.random()*.14+.03, dx:(Math.random()-.5)*.0003, dy:(Math.random()-.5)*.0002, hue:Math.random()>.5?340:25 }));
 let t = 0;
-function drawBg() {
-  ctx.clearRect(0, 0, W, H);
-
-  /* deep bg */
-  const bg = ctx.createRadialGradient(W*.5, H*.4, 0, W*.5, H*.5, Math.max(W,H));
-  bg.addColorStop(0, '#2a0d1a');
-  bg.addColorStop(1, '#0d0508');
-  ctx.fillStyle = bg;
-  ctx.fillRect(0, 0, W, H);
-
-  /* bokeh */
-  bokeh.forEach(b => {
-    b.x = (b.x + b.dx + 1) % 1;
-    b.y = (b.y + b.dy + 1) % 1;
-    const g = ctx.createRadialGradient(b.x*W, b.y*H, 0, b.x*W, b.y*H, b.r);
-    g.addColorStop(0, `hsla(${b.hue},70%,60%,${b.a})`);
-    g.addColorStop(1, `hsla(${b.hue},70%,60%,0)`);
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.arc(b.x*W, b.y*H, b.r, 0, Math.PI*2);
-    ctx.fill();
-  });
-
-  /* stars */
-  stars.forEach(s => {
-    const pulse = Math.sin(t * s.speed * 60 + s.phase) * 0.4 + 0.6;
-    ctx.beginPath();
-    ctx.arc(s.x*W, s.y*H, s.r * pulse, 0, Math.PI*2);
-    ctx.fillStyle = `rgba(255,220,230,${s.a * pulse * 0.9})`;
-    ctx.fill();
-  });
-
-  t += 0.016;
-  requestAnimationFrame(drawBg);
+function drawBg(){
+  ctx.clearRect(0,0,W,H);
+  const bg = ctx.createRadialGradient(W*.5,H*.4,0,W*.5,H*.5,Math.max(W,H));
+  bg.addColorStop(0,'#2a0d1a'); bg.addColorStop(.5,'#180810'); bg.addColorStop(1,'#080305');
+  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+  bokeh.forEach(b=>{ b.x=(b.x+b.dx+1)%1; b.y=(b.y+b.dy+1)%1; const g=ctx.createRadialGradient(b.x*W,b.y*H,0,b.x*W,b.y*H,b.r); g.addColorStop(0,`hsla(${b.hue},78%,58%,${b.a})`); g.addColorStop(1,`hsla(${b.hue},78%,58%,0)`); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(b.x*W,b.y*H,b.r,0,Math.PI*2); ctx.fill(); });
+  stars.forEach(s=>{ const p=Math.sin(t*s.speed*60+s.phase)*.42+.58; ctx.beginPath(); ctx.arc(s.x*W,s.y*H,s.r*p,0,Math.PI*2); ctx.fillStyle=`rgba(255,215,228,${s.a*p*.95})`; ctx.fill(); });
+  t+=.016; requestAnimationFrame(drawBg);
 }
 drawBg();
 
-/* ── PETALS ── */
-function createPetals() {
-  const container = document.getElementById('petals');
-  const colors = ['#f4a7bb','#f9c5d1','#fde8ef','#e8829a','#f7d4de','#fbb6c8'];
-  for (let i = 0; i < 22; i++) {
-    const p = document.createElement('div');
-    p.className = 'petal';
-    const size = Math.random() * 14 + 7;
-    p.style.cssText = `
-      left: ${Math.random()*100}%;
-      width: ${size}px;
-      height: ${size * 0.6}px;
-      background: ${colors[Math.floor(Math.random()*colors.length)]};
-      opacity: 0;
-      animation-duration: ${Math.random()*8+6}s;
-      animation-delay: ${Math.random()*10}s;
-      filter: blur(${Math.random()*1}px);
-    `;
-    container.appendChild(p);
+/* petals */
+function makePetals(){ const c=document.getElementById('petals'), cols=['#f4a7bb','#f9c5d1','#fde8ef','#e8829a','#fbb6c8','#f7d0dc']; for(let i=0;i<32;i++){ const p=document.createElement('div'); p.className='petal'; const sz=Math.random()*18+6; p.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz*.55}px;background:${cols[Math.floor(Math.random()*cols.length)]};animation-duration:${Math.random()*11+7}s;animation-delay:${Math.random()*15}s;filter:blur(${Math.random()*1.3}px);`; c.appendChild(p); } }
+makePetals();
+
+/* floating hearts */
+function spawnHeart(){ const h=document.createElement('div'); h.className='heart-float'; h.textContent=['💗','💕','🌹','💖','✨','🌸'][Math.floor(Math.random()*6)]; h.style.cssText=`left:${Math.random()*100}%;bottom:-20px;animation-duration:${Math.random()*5+4}s;font-size:${Math.random()*14+10}px;`; document.body.appendChild(h); setTimeout(()=>h.remove(),9500); }
+setInterval(spawnHeart, 1000);
+
+/* open letter */
+function openLetter(){
+  const ov=document.getElementById('overlay'); ov.classList.add('show');
+  setTimeout(()=>{
+    document.getElementById('hero').style.display='none';
+    const ls=document.getElementById('letter-section'); ls.style.display='flex'; ls.classList.add('visible');
+    document.getElementById('footer-hearts').style.display='block';
+    document.getElementById('paper').classList.add('paper-reveal');
+    ov.classList.remove('show'); window.scrollTo({top:0,behavior:'instant'}); initReveal();
+  }, 750);
+}
+
+/* scroll reveal */
+function initReveal(){
+  const els=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+  const io=new IntersectionObserver(entries=>{ entries.forEach((e,i)=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('in'),i*35); io.unobserve(e.target); } }); },{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+  els.forEach(el=>io.observe(el));
+}
+
+/* click burst */
+document.addEventListener('click', e=>{
+  const emojis=['💗','💕','🌹','💖','✨','🌸','💝'];
+  for(let i=0;i<7;i++){
+    const h=document.createElement('div');
+    h.style.cssText=`position:fixed;left:${e.clientX}px;top:${e.clientY}px;pointer-events:none;z-index:9998;font-size:${Math.random()*16+10}px;transform:translate(-50%,-50%);transition:all ${.65+Math.random()*.4}s ease-out;`;
+    h.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    document.body.appendChild(h);
+    const ang=(Math.random()*360)*Math.PI/180, dist=Math.random()*90+40;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      h.style.transform=`translate(calc(-50% + ${Math.cos(ang)*dist}px),calc(-50% + ${Math.sin(ang)*dist}px)) scale(0)`;
+      h.style.opacity='0';
+    }));
+    setTimeout(()=>h.remove(),1200);
   }
-}
-createPetals();
-
-/* ── OPEN LETTER ── */
-function openLetter() {
-  const overlay = document.getElementById('overlay');
-  overlay.classList.add('show');
-
-  setTimeout(() => {
-    document.getElementById('hero').style.display = 'none';
-    const ls = document.getElementById('letter-section');
-    ls.style.display = 'flex';
-    ls.classList.add('visible');
-    document.getElementById('footer-hearts').style.display = 'block';
-
-    const paper = document.getElementById('paper');
-    paper.classList.add('paper-reveal');
-
-    overlay.classList.remove('show');
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, 600);
-}
+});
 </script>
 </body>
 </html>
